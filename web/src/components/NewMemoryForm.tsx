@@ -17,7 +17,7 @@ export function NewMemoryForm() {
 
     const fileToUpload = formData.get('coverUrl')
 
-    let converUrl = ''
+    let coverUrl = ''
 
     if (fileToUpload) {
       const uploadFormData = new FormData()
@@ -25,7 +25,7 @@ export function NewMemoryForm() {
 
       const uploadResponse = await api.post('/upload', uploadFormData)
 
-      converUrl = uploadResponse.data.fileUrl
+      coverUrl = uploadResponse.data.fileUrl
     }
 
     const token = Cookie.get('token')
@@ -33,8 +33,8 @@ export function NewMemoryForm() {
     await api.post(
       '/memories',
       {
-        converUrl,
         content: formData.get('content'),
+        coverUrl,
         isPublic: formData.get('isPublic'),
       },
       {
